@@ -1,22 +1,24 @@
 const { SlashCommandBuilder, PermissionFlagsBits } = require('discord.js');
 
 /**
- * Command: kick
- * Description: Kicks a member from the server.
+ * Command: ban
+ * Description: Bans a member from the server.
  */
 module.exports = {
+  name: 'ban',
+	description: 'Bans a member from the server.',
   data: new SlashCommandBuilder()
-    .setName('kick')
-    .setDescription('Kicks a member from the server')
-    .setDefaultMemberPermissions(PermissionFlagsBits.KickMembers)
+    .setName('ban')
+    .setDescription('Bans a member from the server')
+    .setDefaultMemberPermissions(PermissionFlagsBits.BanMembers)
     .addUserOption(option =>
       option.setName('target')
-        .setDescription('The member to kick')
+        .setDescription('The member to ban')
         .setRequired(true)
     )
     .addStringOption(option =>
       option.setName('reason')
-        .setDescription('Reason for the kick')
+        .setDescription('Reason for the ban')
         .setRequired(false)
     ),
 
@@ -33,12 +35,12 @@ module.exports = {
         });
       }
 
-      await member.kick(reason);
-      await interaction.reply(`✅ Successfully kicked ${target.tag} for: ${reason}`);
+      await member.ban({ reason });
+      await interaction.reply(`✅ Successfully banned ${target.tag} for: ${reason}`);
     } catch (error) {
-      console.error('❌ Error executing kick command:', error);
+      console.error('❌ Error executing ban command:', error);
       await interaction.reply({
-        content: 'An error occurred while trying to kick the member.',
+        content: 'An error occurred while trying to ban the member.',
         ephemeral: true,
       });
     }

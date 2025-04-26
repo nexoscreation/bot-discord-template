@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "bot:start": "node --trace-warnings index.js",
-    "bot:deploy": "node --trace-warnings deploy-commands.js",
-    "bot:delete": "node --trace-warnings delete-commands.js",
+    "bot:deploy": "node --trace-warnings commands/utility/deploy-commands.js",
+    "bot:delete": "node --trace-warnings commands/utility/delete-commands.js",
     "dev": "nodemon index.js",
     "lint": "eslint .",
     "test": "echo \"Error: no test specified\" && exit 1"

@@ -5,6 +5,8 @@ const { SlashCommandBuilder } = require('discord.js');
  * Description: Warns a member and logs it (placeholder for a database).
  */
 module.exports = {
+  name: 'warn',
+	description: ' Warns a member and logs it (placeholder for a database).',
   data: new SlashCommandBuilder()
     .setName('warn')
     .setDescription('Warns a member for breaking rules')

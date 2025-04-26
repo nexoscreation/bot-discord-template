@@ -1,22 +1,24 @@
 const { SlashCommandBuilder, PermissionFlagsBits } = require('discord.js');
 
 /**
- * Command: mute
- * Description: Mutes a member by assigning a "Muted" role.
+ * Command: untimeout
+ * Description: Removes the timeout (or "silence") from a member.
  */
 module.exports = {
+  name: 'untimeout',
+	description: 'Removes the timeout (or "silence") from a member.',
   data: new SlashCommandBuilder()
-    .setName('mute')
-    .setDescription('Mutes a member by assigning a "Muted" role')
+    .setName('untimeout')
+    .setDescription('Removes a timeout from a member')
     .setDefaultMemberPermissions(PermissionFlagsBits.ModerateMembers)
     .addUserOption(option =>
       option.setName('target')
-        .setDescription('The member to mute')
+        .setDescription('The member to remove timeout from')
         .setRequired(true)
     )
     .addStringOption(option =>
       option.setName('reason')
-        .setDescription('Reason for the mute')
+        .setDescription('Reason for the untimeout')
         .setRequired(false)
     ),
 
@@ -25,14 +27,6 @@ module.exports = {
       const target = interaction.options.getUser('target');
       const reason = interaction.options.getString('reason') || 'No reason provided.';
       const member = interaction.guild.members.cache.get(target.id);
-      const mutedRole = interaction.guild.roles.cache.find(role => role.name === 'Muted');
-
-      if (!mutedRole) {
-        return await interaction.reply({
-          content: '❌ "Muted" role not found. Please create one before using this command.',
-          ephemeral: true,
-        });
-      }
 
       if (!member) {
         return await interaction.reply({
@@ -41,12 +35,19 @@ module.exports = {
         });
       }
 
-      await member.roles.add(mutedRole, reason);
-      await interaction.reply(`✅ Successfully muted ${target.tag} for: ${reason}`);
+      if (!member.communicationDisabledUntil) {
+        return await interaction.reply({
+          content: `❌ ${target.tag} is not currently in a timeout.`,
+          ephemeral: true,
+        });
+      }
+
+      await member.timeout(null, reason);
+      await interaction.reply(`✅ Successfully removed the timeout from ${target.tag}. Reason: ${reason}`);
     } catch (error) {
-      console.error('❌ Error executing mute command:', error);
+      console.error('❌ Error executing untimeout command:', error);
       await interaction.reply({
-        content: 'An error occurred while trying to mute the member.',
+        content: 'An error occurred while trying to remove the timeout.',
         ephemeral: true,
       });
     }

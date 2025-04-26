@@ -5,6 +5,8 @@ const { SlashCommandBuilder } = require('discord.js');
  * Description: Rolls a random number between 1 and 100.
  */
 module.exports = {
+  name: 'roll',
+	description: 'Rolls a random number between 1 and 100.',
   data: new SlashCommandBuilder()
     .setName('roll')
     .setDescription('Rolls a random number between 1 and 100'),

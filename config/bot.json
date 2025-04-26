@@ -4,6 +4,5 @@
   "BOT_STATUS": "online",
   "BOT_PREFIX": "process.env.DISCORD_BOT_PREFIX",
   "BOT_TOKEN": "process.env.DISCORD_BOT_TOKEN",
-  "BOT_CLIENT_ID": "process.env.DISCORD_BOT_CLIENT_ID",
-  "BOT_PUBLIC_ID": "_YOUR_BOT_PUBLIC_ID_"
+  "BOT_CLIENT_ID": "process.env.DISCORD_BOT_CLIENT_ID"
 }

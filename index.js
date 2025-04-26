@@ -21,21 +21,21 @@ const client = new Client({
 client.commands = new Collection();
 
 /**
- * Load Basic Commands
- * Commands stored in the `basics/` directory
+ * Load Prefix Commands
+ * Commands stored in the `prefix/` directory
  */
-const BasicCommandFiles = fs.readdirSync('./basics').filter(file => file.endsWith('.js'));
-for (const file of BasicCommandFiles) {
-  const command = require(`./basics/${file}`);
+const PrefixCommandFiles = fs.readdirSync('./commands/prefix').filter(file => file.endsWith('.js'));
+for (const file of PrefixCommandFiles) {
+  const command = require(`./commands/prefix/${file}`);
   client.commands.set(command.name, command);
 }
 
 
 /**
  * Load Slash Commands
- * Commands categorized into folders under `commands/`
+ * Commands categorized into folders under `slash/`
  */
-const commandsPath = path.join(__dirname, 'commands');
+const commandsPath = path.join(__dirname, 'commands/slash');
 const commandFolders = fs.readdirSync(commandsPath);
 
 for (const folder of commandFolders) {

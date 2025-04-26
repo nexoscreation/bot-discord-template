@@ -9,7 +9,7 @@ const commands = [];
  * Loads all the command data from the commands directory.
  */
 function loadCommands() {
-  const foldersPath = path.join(__dirname, 'commands');
+  const foldersPath = path.join(__dirname, 'commands/slash');
   const commandFolders = fs.readdirSync(foldersPath);
 
   for (const folder of commandFolders) {

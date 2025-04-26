@@ -6,6 +6,8 @@ const { SlashCommandBuilder } = require('discord.js');
  * Description: Fetches a random joke from an API.
  */
 module.exports = {
+  name: 'joke',
+	description: 'Fetches a random joke from an API',
   data: new SlashCommandBuilder()
     .setName('joke')
     .setDescription('Fetches a random joke'),
