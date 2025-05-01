@@ -6,7 +6,7 @@ const { SlashCommandBuilder, PermissionFlagsBits } = require('discord.js');
  */
 module.exports = {
   name: 'purge',
-	description: 'Purges a specified number of messages from a channel.',
+  description: 'Purges a specified number of messages from a channel.',
   data: new SlashCommandBuilder()
     .setName('purge')
     .setDescription('Purges a specified number of messages from the channel')
@@ -44,7 +44,8 @@ module.exports = {
           ephemeral: true,
         });
       }
-         // Delete the filtered messages
+      
+      // Delete the filtered messages
       await interaction.channel.bulkDelete(filteredMessages);
 
       await interaction.reply(`✅ Successfully deleted ${filteredMessages} message(s).`);
