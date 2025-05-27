@@ -1,5 +1,5 @@
-const { SlashCommandBuilder } = require('discord.js');
-const { logError } = require('../../../utils/logger');
+const { SlashCommandBuilder, PermissionFlagsBits} = require('discord.js');
+const { logError, logWarn } = require('../../../utils/logger');
 
 /**
  * Command: warn
@@ -12,6 +12,7 @@ module.exports = {
   data: new SlashCommandBuilder()
     .setName('warn')
     .setDescription('Warns a member for breaking rules')
+    .setDefaultMemberPermissions(PermissionFlagsBits.Administrator)
     .addUserOption(option =>
       option.setName('target')
         .setDescription('The member to warn')
@@ -31,7 +32,7 @@ module.exports = {
       await interaction.reply(`⚠️ ${target.tag} has been warned. Reason: ${reason}`);
 
       // Log the warning (placeholder for a real database implementation)
-      console.log(`WARN LOG: ${target.tag} was warned for: ${reason}`);
+      logWarn(`⚠️ ${target.tag} was warned for: ${reason}`);
     } catch (error) {
         logError(`❌ Error executing warn command: ${error}`);
       await interaction.reply({

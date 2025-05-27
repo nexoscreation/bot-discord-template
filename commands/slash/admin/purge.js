@@ -12,7 +12,7 @@ module.exports = {
   data: new SlashCommandBuilder()
     .setName('purge')
     .setDescription('Purges a specified number of messages from the channel')
-    .setDefaultMemberPermissions(PermissionFlagsBits.ManageMessages)
+    .setDefaultMemberPermissions(PermissionFlagsBits.Administrator)
     .addIntegerOption(option =>
       option.setName('amount')
         .setDescription('Number of messages to purge')
