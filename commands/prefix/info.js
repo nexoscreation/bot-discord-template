@@ -2,6 +2,8 @@
  * Prefix Command: info
  * Description: Provides bot information.
  */
+const { logError } = require('../../utils/logger')
+
 module.exports = {
   name: 'info',
   description: 'Displays bot information.',
@@ -21,7 +23,7 @@ module.exports = {
 
       await message.reply(infoMessage);
     } catch (error) {
-      console.error('❌ Error executing info command:', error);
+        logError(`❌ Error executing info command: ${error}`);
       await message.reply({
         content: 'An error occurred while fetching bot information.',
       });

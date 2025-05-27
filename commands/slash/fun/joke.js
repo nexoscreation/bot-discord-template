@@ -1,10 +1,10 @@
 const { SlashCommandBuilder } = require('discord.js');
-// const fetch = require('node-fetch');
-
+const { logError } = require('../../../utils/logger')
 /**
  * Command: joke
  * Description: Fetches a random joke from an API.
  */
+
 module.exports = {
   name: 'joke',
 	description: 'Fetches a random joke from an API',
@@ -19,7 +19,7 @@ module.exports = {
 
       await interaction.reply(`😂 **${joke.setup}**\n\n*${joke.punchline}*`);
     } catch (error) {
-      console.error('❌ Error fetching a joke:', error);
+        logError(`❌ Error fetching a joke:: ${error}`);
       await interaction.reply({
         content: 'Failed to fetch a joke. Please try again later.',
         ephemeral: true,

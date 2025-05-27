@@ -1,5 +1,5 @@
 const { SlashCommandBuilder, PermissionFlagsBits } = require('discord.js');
-
+const { logError } = require('../../../utils/logger');
 /**
  * Command: kick
  * Description: Kicks a member from the server.
@@ -38,7 +38,7 @@ module.exports = {
       await member.kick(reason);
       await interaction.reply(`✅ Successfully kicked ${target.tag} for: ${reason}`);
     } catch (error) {
-      console.error('❌ Error executing kick command:', error);
+        logError(`❌ Error executing kick command: ${error}`);
       await interaction.reply({
         content: 'An error occurred while trying to kick the member.',
         ephemeral: true,

@@ -1,5 +1,5 @@
 const { SlashCommandBuilder, PermissionFlagsBits } = require('discord.js');
-
+const { logError } = require('../../../utils/logger');
 /**
  * Command: ban
  * Description: Bans a member from the server.
@@ -38,7 +38,7 @@ module.exports = {
       await member.ban({ reason });
       await interaction.reply(`✅ Successfully banned ${target.tag} for: ${reason}`);
     } catch (error) {
-      console.error('❌ Error executing ban command:', error);
+        logError(`❌ Error executing ban command: ${error}`);
       await interaction.reply({
         content: 'An error occurred while trying to ban the member.',
         ephemeral: true,

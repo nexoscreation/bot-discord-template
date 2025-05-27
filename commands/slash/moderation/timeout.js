@@ -1,5 +1,5 @@
 const { SlashCommandBuilder, PermissionFlagsBits } = require('discord.js');
-
+const { logError } = require('../../../utils/logger');
 /**
  * Command: timeout
  * Description: Temporarily mutes a member for a specific duration.
@@ -45,7 +45,7 @@ module.exports = {
       await member.timeout(timeoutMs, reason);
       await interaction.reply(`✅ ${target.tag} has been timed out for ${duration} minutes. Reason: ${reason}`);
     } catch (error) {
-      console.error('❌ Error executing timeout command:', error);
+        logError(`❌ Error executing timeout command: ${error}`);
       await interaction.reply({
         content: 'An error occurred while trying to timeout the member.',
         ephemeral: true,

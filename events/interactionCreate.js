@@ -2,6 +2,8 @@
  * Event: interactionCreate
  * Triggered when a user interacts with a slash command or button.
  */
+const { logError } = require('../utils/logger')
+
 module.exports = {
   name: 'interactionCreate',
   async execute(interaction) {
@@ -21,7 +23,7 @@ module.exports = {
     try {
       await command.execute(interaction);
     } catch (error) {
-      console.error(`❌ Error executing ${interaction.commandName} command:`, error);
+        logError(`❌ Error executing ${interaction.commandName} command: ${error}`);
       await interaction.reply({
         content: 'There was an error while executing this command!',
         ephemeral: true,

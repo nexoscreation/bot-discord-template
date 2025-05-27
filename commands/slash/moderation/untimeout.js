@@ -1,5 +1,5 @@
 const { SlashCommandBuilder, PermissionFlagsBits } = require('discord.js');
-
+const { logError } = require('../../../utils/logger');
 /**
  * Command: untimeout
  * Description: Removes the timeout (or "silence") from a member.
@@ -45,7 +45,7 @@ module.exports = {
       await member.timeout(null, reason);
       await interaction.reply(`✅ Successfully removed the timeout from ${target.tag}. Reason: ${reason}`);
     } catch (error) {
-      console.error('❌ Error executing untimeout command:', error);
+        logError(`❌ Error executing untimeout command: ${error}`);
       await interaction.reply({
         content: 'An error occurred while trying to remove the timeout.',
         ephemeral: true,

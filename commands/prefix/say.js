@@ -2,6 +2,8 @@
  * Command: say
  * Description: Makes the bot repeat a message.
  */
+const { logError } = require('../../utils/logger')
+
 module.exports = {
   name: 'say',
   description: 'Make the bot repeat a message.',
@@ -25,7 +27,7 @@ module.exports = {
       // Send the repeated message
       await message.channel.send(sayMessage);
     } catch (error) {
-      console.error('❌ Error executing say command:', error);
+        logError(`❌ Error executing say command: ${error}`);
       message.channel.send('An error occurred while trying to repeat your message.');
     }
   },

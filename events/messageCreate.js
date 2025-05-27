@@ -3,6 +3,7 @@
  * Triggered whenever a new message is created.
  */
 
+const { logError } = require('../utils/logger')
 const PREFIX = process.env.DISCORD_BOT_PREFIX;
 
 module.exports = {
@@ -23,7 +24,7 @@ module.exports = {
     try {
       command.execute(message, args);
     } catch (error) {
-      console.error(`❌ Error executing ${commandName} command:`, error);
+        logError(`❌ Error executing ${commandName} command: ${error}`);
       message.reply('There was an error while executing this command.');
     }
   },

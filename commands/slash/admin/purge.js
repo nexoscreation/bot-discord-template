@@ -4,6 +4,8 @@ const { SlashCommandBuilder, PermissionFlagsBits } = require('discord.js');
  * Command: purge
  * Description: Purges a specified number of messages from a channel.
  */
+const { logError } = require('../../../utils/logger')
+
 module.exports = {
   name: 'purge',
   description: 'Purges a specified number of messages from a channel.',
@@ -50,7 +52,7 @@ module.exports = {
 
       await interaction.reply(`✅ Successfully deleted ${filteredMessages} message(s).`);
     } catch (error) {
-      console.error('❌ Error executing purge command:', error);
+        logError(`❌ Error executing purge command: ${error}`);
       await interaction.reply({
         content: 'An error occurred while trying to purge the messages.',
         ephemeral: true,

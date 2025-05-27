@@ -1,5 +1,5 @@
 const { SlashCommandBuilder, PermissionFlagsBits } = require('discord.js');
-
+const { logError } = require('../../../utils/logger');
 /**
  * Command: unban
  * Description: Unbans a previously banned member from the server.
@@ -40,7 +40,7 @@ module.exports = {
       await interaction.guild.members.unban(userId, reason);
       await interaction.reply(`✅ Successfully unbanned <@${userId}> for: ${reason}`);
     } catch (error) {
-      console.error('❌ Error executing unban command:', error);
+        logError(`❌ Error executing unban command: ${error}`);
       await interaction.reply({
         content: 'An error occurred while trying to unban the member.',
         ephemeral: true,

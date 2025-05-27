@@ -4,6 +4,8 @@ const { ChannelType } = require('discord.js');
  * Command: server
  * Description: Displays server details.
  */
+const { logError } = require('../../utils/logger')
+
 module.exports = {
   name: 'server',
   description: 'Displays server information.',
@@ -32,7 +34,7 @@ module.exports = {
 
       message.reply(serverInfo);
     } catch (error) {
-      console.error('❌ Error executing server command:', error);
+        logError(`❌ Error executing server command: ${error}`);
       message.reply('An error occurred while fetching server information.');
     }
   },

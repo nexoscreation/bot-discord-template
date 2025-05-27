@@ -1,5 +1,6 @@
 const { REST, Routes } = require('discord.js');
 require('dotenv').config();
+const { logInfo,logError } = require('../../utils/logger')
 
 const rest = new REST({ version: '10' }).setToken(process.env.DISCORD_BOT_TOKEN);
 
@@ -9,11 +10,11 @@ const rest = new REST({ version: '10' }).setToken(process.env.DISCORD_BOT_TOKEN)
 async function deleteAllCommands() {
   try {
     if (!process.env.DISCORD_BOT_CLIENT_ID || !process.env.DISCORD_GUILD_ID || !process.env.DISCORD_BOT_TOKEN) {
-      console.error('Missing required environment variables. Check your .env file.');
+        logError('Missing required environment variables. Check your .env file.')
       process.exit(1);
     }
 
-    console.log('Started deleting all application (/) commands.');
+      logInfo(`Started deleting all application (/) commands.`);
 
     // Fetching all commands from the guild
     const commands = await rest.get(
@@ -27,10 +28,10 @@ async function deleteAllCommands() {
       );
     }
 
-    console.log('Successfully deleted all application (/) commands.');
+      logInfo(`Successfully deleted all application (/) commands.`);
   } catch (error) {
-    // Improved error handling with context
-    console.error('Error occurred while deleting commands:', error);
+      // Improved error handling with context
+      logError(`Error occurred while deleting commands: ${error}`);
   }
 }
 

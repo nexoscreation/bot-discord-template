@@ -2,6 +2,7 @@ const fs = require('node:fs');
 const path = require('node:path');
 const { Client, Collection, GatewayIntentBits } = require('discord.js');
 const dotenv = require('dotenv');
+const { logInfo, logWarn, logError } = require('./utils/logger')
 
 // Load environment variables
 dotenv.config();
@@ -49,7 +50,7 @@ for (const folder of commandFolders) {
     if ('data' in command && 'execute' in command) {
       client.commands.set(command.data.name, command);
     } else {
-      console.log(`[WARNING] The command at ${filePath} is missing "data" or "execute".`);
+        logWarn(`The command at ${filePath} is missing "data" or "execute".`)
     }
   }
 }
@@ -81,16 +82,16 @@ for (const file of eventFiles) {
 
 // Error handling for client events
 client.on('error', (error) => {
-  console.error('❌ Discord.js client encountered an error:', error);
+    logError(`❌ Discord.js client encountered an error: ${error}`);
 });
 
 client.on('shardError', (error) => {
-  console.error('❌ WebSocket encountered an error:', error);
+    logError(`❌ WebSocket encountered an error: ${error}`);
 });
 
 // Listen for rate limit warnings
 client.on('rateLimit', (info) => {
-  console.warn('⚠️ Rate limit hit:', info);
+    logWarn(`⚠️ Rate limit hit: ${info}`);
 });
 
 // Handle missing permissions or configuration issues
@@ -103,22 +104,19 @@ client.on('guildCreate', (guild) => {
   ]);
 
   if (missingPermissions.length > 0) {
-    console.error(
-      `⚠️ Missing permissions in guild "${guild.name}":`,
-      missingPermissions
-    );
+      logError(`⚠️ Missing permissions in guild "${guild.name}": ${missingPermissions}`);
   }
 });
 
 // General uncaught errors
 process.on('uncaughtException', (error) => {
-  console.error('❌ Uncaught exception:', error);
+    logError(`❌ Uncaught exception: ${error}`);
   // Optionally exit the process if critical
   process.exit(1);
 });
 
 process.on('unhandledRejection', (reason, promise) => {
-  console.error('❌ Unhandled promise rejection at:', promise, 'reason:', reason);
+    logError(`❌ Unhandled promise rejection at: ${promise}, reason: ${reason}`);
 });
 
 /**
@@ -131,5 +129,6 @@ process.on('unhandledRejection', (reason, promise) => {
  * Authenticates the bot using the token from `.env`
  */
 client.login(process.env.DISCORD_BOT_TOKEN)
-  .then(() => console.log('✅ Bot started successfully!'))
+    .then(() => logInfo('✅ Bot started successfully!')
+    )
   .catch(console.error); // Log authentication errors

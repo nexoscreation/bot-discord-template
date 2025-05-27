@@ -2,6 +2,8 @@
  * Command: help
  * Description: Lists all available commands.
  */
+const { logError } = require('../../utils/logger')
+
 module.exports = {
   name: 'help', // Command name
   description: 'Lists all available commands.',
@@ -21,7 +23,7 @@ module.exports = {
       const helpMessage = `📜 **Available Commands**:\n\n${commands.join('\n')}`;
       message.reply(helpMessage);
     } catch (error) {
-      console.error('❌ Error executing help command:', error);
+        logError(`❌ Error executing help command: ${error}`);
       message.reply('An error occurred while fetching the help list.');
     }
   },

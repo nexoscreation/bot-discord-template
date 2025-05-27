@@ -2,6 +2,7 @@ const { REST, Routes } = require('discord.js');
 const fs = require('node:fs');
 const path = require('node:path');
 require('dotenv').config();
+const { logInfo, logWarn, logError } = require('../../utils/logger')
 
 const commands = [];
 
@@ -23,7 +24,7 @@ function loadCommands() {
       if ('data' in command && 'execute' in command) {
         commands.push(command.data.toJSON());
       } else {
-        console.log(`[WARNING] The command at ${filePath} is missing a required "data" or "execute" property.`);
+          logWarn(`The command at ${filePath} is missing a required "data" or "execute" property.`);
       }
     }
   }
@@ -33,15 +34,15 @@ function loadCommands() {
  * Deploy the loaded commands to the guild.
  */
 async function deployCommands() {
-  if (!process.env.DISCORD_BOT_CLIENT_ID || !process.env.DISCORD_GUILD_ID || !process.env.DISCORD_BOT_TOKEN) {
-    console.error('Missing required environment variables. Check your .env file.');
+    if (!process.env.DISCORD_BOT_CLIENT_ID || !process.env.DISCORD_GUILD_ID || !process.env.DISCORD_BOT_TOKEN) {
+        logError('Missing required environment variables.Check your.env file.')
     process.exit(1);
   }
 
   const rest = new REST({ version: '10' }).setToken(process.env.DISCORD_BOT_TOKEN);
 
-  try {
-    console.log(`Started refreshing ${commands.length} application (/) commands.`);
+    try {
+        logInfo(`Started refreshing ${commands.length} application (/) commands.`);
 
     // Refreshing the commands in the guild
     const data = await rest.put(
@@ -49,9 +50,9 @@ async function deployCommands() {
       { body: commands }
     );
 
-    console.log(`Successfully reloaded ${data.length} application (/) commands.`);
-  } catch (error) {
-    console.error('Error occurred while deploying commands:', error);
+        logInfo(`Successfully reloaded ${data.length} application (/) commands.`);
+    } catch (error) {
+        logError(`Error occurred while deploying commands: ${error}`);
   }
 }
 

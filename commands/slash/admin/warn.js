@@ -1,9 +1,11 @@
 const { SlashCommandBuilder } = require('discord.js');
+const { logError } = require('../../../utils/logger');
 
 /**
  * Command: warn
  * Description: Warns a member and logs it (placeholder for a database).
  */
+
 module.exports = {
   name: 'warn',
 	description: ' Warns a member and logs it (placeholder for a database).',
@@ -31,7 +33,7 @@ module.exports = {
       // Log the warning (placeholder for a real database implementation)
       console.log(`WARN LOG: ${target.tag} was warned for: ${reason}`);
     } catch (error) {
-      console.error('❌ Error executing warn command:', error);
+        logError(`❌ Error executing warn command: ${error}`);
       await interaction.reply({
         content: 'An error occurred while trying to warn the member.',
         ephemeral: true,

@@ -1,5 +1,5 @@
 const { SlashCommandBuilder, PermissionFlagsBits } = require('discord.js');
-
+const { logError } = require('../../../utils/logger');
 /**
  * Command: slowmode
  * Description: Sets a slowmode for a channel.
@@ -28,7 +28,7 @@ module.exports = {
 
       await interaction.reply(`✅ Successfully set slowmode to ${duration} seconds.`);
     } catch (error) {
-      console.error('❌ Error executing slowmode command:', error);
+        logError(`❌ Error executing slowmode command: ${error}`);
       await interaction.reply({
         content: 'An error occurred while trying to set slowmode.',
         ephemeral: true,

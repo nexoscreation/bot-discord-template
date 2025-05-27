@@ -1,5 +1,5 @@
 const { SlashCommandBuilder, PermissionFlagsBits } = require('discord.js');
-
+const { logError } = require('../../../utils/logger');
 /**
  * Command: mute
  * Description: Mutes a member by assigning a "Muted" role.
@@ -46,7 +46,7 @@ module.exports = {
       await member.roles.add(mutedRole, reason);
       await interaction.reply(`✅ Successfully muted ${target.tag} for: ${reason}`);
     } catch (error) {
-      console.error('❌ Error executing mute command:', error);
+        logError(`❌ Error executing mute command: ${error}`);
       await interaction.reply({
         content: 'An error occurred while trying to mute the member.',
         ephemeral: true,

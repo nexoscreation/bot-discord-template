@@ -1,5 +1,5 @@
 const { SlashCommandBuilder, PermissionFlagsBits } = require('discord.js');
-
+const { logError } = require('../../../utils/logger');
 /**
  * Command: unmute
  * Description: Unmutes a member by removing the "Muted" role.
@@ -53,7 +53,7 @@ module.exports = {
       await member.roles.remove(mutedRole, reason);
       await interaction.reply(`✅ Successfully unmuted ${target.tag} for: ${reason}`);
     } catch (error) {
-      console.error('❌ Error executing unmute command:', error);
+        logError(`❌ Error executing unmute command: ${error}`);
       await interaction.reply({
         content: 'An error occurred while trying to unmute the member.',
         ephemeral: true,

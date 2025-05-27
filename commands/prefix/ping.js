@@ -2,6 +2,8 @@
  * Prefix Command: ping
  * Description: Checks bot responsiveness and API latency.
  */
+const { logError } = require('../../utils/logger')
+
 module.exports = {
   name: 'ping',
   description: 'Checks bot responsiveness and API latency.',
@@ -19,7 +21,7 @@ module.exports = {
       // Edit the reply with the latency values
       await sentMessage.edit(`🏓 Pong! Latency: ${latency}ms | API Latency: ${apiLatency}ms`);
     } catch (error) {
-      console.error('❌ Error executing ping command:', error);
+        logError(`❌ Error executing ping command: ${error}`);
       await message.reply({
         content: 'An error occurred while trying to calculate latency.',
         ephemeral: true,

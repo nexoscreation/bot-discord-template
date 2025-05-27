@@ -2,6 +2,8 @@
  * Command: user
  * Description: Displays user-specific details.
  */
+const { logError } = require('../../utils/logger')
+
 module.exports = {
   name: 'user',
   description: 'Displays your user details.',
@@ -29,7 +31,7 @@ module.exports = {
     try {
       message.reply(userInfo);
     } catch (error) {
-      console.error('❌ Error executing user command:', error);
+        logError(`❌ Error executing user command: ${error}`);
       message.reply('An error occurred while fetching your user information.');
     }
   },
