@@ -8,7 +8,7 @@
 
 #### ✨ Modular Command System
 
-Organized by categories for both **prefix** and **slash** commands.
+Organized by categories for both **prefix**, **context** and **slash** commands.
 
 #### ⚙️ Dynamic Event Handling
 

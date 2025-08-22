@@ -18,10 +18,10 @@ const levels = {
  */
 const log = (level, message) => {
   if (!levels[level]) {
-    console.log(`${chalk.gray('LOG')} [${new Date().toISOString()}] ${message}`);
+    console.log(`${chalk.gray('LOG')} [${new Date().toLocaleString()}] ${message}`);
     return;
   }
-  console.log(`${levels[level]} [${new Date().toISOString()}] ${message}`);
+  console.log(`${levels[level]} [${new Date().toLocaleString()}] ${message}`);
 };
 
 module.exports = {

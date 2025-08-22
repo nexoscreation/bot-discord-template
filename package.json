@@ -4,12 +4,11 @@
   "description": "A modular and scalable Discord bot starter template using Discord.js",
   "main": "index.js",
   "scripts": {
-    "bot:start": "node --trace-warnings index.js",
-    "bot:deploy": "node --trace-warnings commands/utility/deploy-commands.js",
-    "bot:delete": "node --trace-warnings commands/utility/delete-commands.js",
-    "dev": "nodemon index.js",
-    "lint": "eslint .",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "bot:start": "node index.js",
+    "bot:deploy": "node commands/utility/deploy-commands.js --global --trace-warnings",
+    "bot:delete": "node commands/utility/delete-commands.js --global --trace-warnings",
+    "dev": "nodemon index.js --trace-warnings",
+    "lint": "eslint ."
   },
   "keywords": [
     "discord",
