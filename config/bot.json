@@ -1,7 +1,7 @@
 {
   "BOT_NAME": "_YOUR_BOT_NAME_",
   "BOT_ICON": "_YOUR_BOT_ICON_URL_",
-  "BOT_STATUS": "online",
+  "BOT_STATUS": "dnd",
   "BOT_PREFIX": "process.env.DISCORD_BOT_PREFIX",
   "BOT_TOKEN": "process.env.DISCORD_BOT_TOKEN",
   "BOT_CLIENT_ID": "process.env.DISCORD_BOT_CLIENT_ID"

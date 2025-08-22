@@ -3,11 +3,11 @@
  * Triggered whenever a new message is created.
  */
 
-const { logError } = require('../utils/logger')
+const { logError } = require("../utils/logger");
 const PREFIX = process.env.DISCORD_BOT_PREFIX;
 
 module.exports = {
-  name: 'messageCreate',
+  name: "messageCreate",
   execute(message) {
     // Ignore bot messages or messages without the bot prefix
     if (!message.content.startsWith(PREFIX) || message.author.bot) return;
@@ -24,8 +24,8 @@ module.exports = {
     try {
       command.execute(message, args);
     } catch (error) {
-        logError(`❌ Error executing ${commandName} command: ${error}`);
-      message.reply('There was an error while executing this command.');
+      logError(`❌ Error executing ${commandName} command: ${error}`);
+      message.reply("There was an error while executing this command.");
     }
   },
 };

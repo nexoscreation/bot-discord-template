@@ -2,11 +2,11 @@
  * Command: user
  * Description: Displays user-specific details.
  */
-const { logError } = require('../../utils/logger')
+const { logError } = require("../../utils/logger");
 
 module.exports = {
-  name: 'user',
-  description: 'Displays your user details.',
+  name: "user",
+  description: "Displays your user details.",
 
   execute(message) {
     const user = message.author;
@@ -14,15 +14,15 @@ module.exports = {
 
     const roles = member
       ? member.roles.cache
-        .filter(role => role.id !== message.guild.id) // Exclude @everyone
-        .map(role => role.name)
-        .join(', ') || 'No roles'
-      : 'No roles';
+          .filter((role) => role.id !== message.guild.id) // Exclude @everyone
+          .map((role) => role.name)
+          .join(", ") || "No roles"
+      : "No roles";
 
     const userInfo = `🙋 **User Information**:
 - Username: ${user.tag}
 - ID: ${user.id}
-- Joined Server: ${member?.joinedAt?.toDateString() || 'N/A'}
+- Joined Server: ${member?.joinedAt?.toDateString() || "N/A"}
 - Account Created: ${user.createdAt.toDateString()}
 - Roles: ${roles}
 - Avatar: [Click here to view avatar](${user.displayAvatarURL()})
@@ -31,8 +31,8 @@ module.exports = {
     try {
       message.reply(userInfo);
     } catch (error) {
-        logError(`❌ Error executing user command: ${error}`);
-      message.reply('An error occurred while fetching your user information.');
+      logError(`❌ Error executing user command: ${error}`);
+      message.reply("An error occurred while fetching your user information.");
     }
   },
 };

@@ -70,11 +70,13 @@ DISCORD_GUILD_ID=your-guild-id (optional for testing)
 ### 🔥 Running the Bot
 
 #### Production Mode:
+
 ```bash
 npm run bot:start
 ```
 
 #### Development Mode (hot reload):
+
 ```bash
 npm run dev
 ```
@@ -82,11 +84,13 @@ npm run dev
 ### ⚙️ Commands
 
 #### Deploying Slash Commands
+
 ```bash
 npm run bot:deploy
 ```
 
 #### Deleting All Slash Commands
+
 ```bash
 npm run bot:delete
 ```
@@ -95,30 +99,29 @@ npm run bot:delete
 
 ## 📜 Available Commands
 
-| Command     | Type    | Description                    |
-|-------------|---------|---------------------------------|
-| `!help`     | Prefix   | Lists all available commands   |
-| `!info`     | Prefix   | Displays bot information       |
-| `!ping`     | Prefix   | Check bot and API latency      |
-| `!say`      | Prefix   | Make the bot repeat a message  |
-| `!server`   | Prefix   | Displays server information    |
-| `!user`     | Prefix   | Displays your user details     |
+| Command   | Type   | Description                   |
+| --------- | ------ | ----------------------------- |
+| `!help`   | Prefix | Lists all available commands  |
+| `!info`   | Prefix | Displays bot information      |
+| `!ping`   | Prefix | Check bot and API latency     |
+| `!say`    | Prefix | Make the bot repeat a message |
+| `!server` | Prefix | Displays server information   |
+| `!user`   | Prefix | Displays your user details    |
 
 ## 🛡️ Moderation Slash Commands
 
-| Command     | Description                               |
-|-------------|-------------------------------------------|
-| `/ban`      | Bans a user                               |
-| `/unban`    | Unbans a user                             |
-| `/kick`     | Kicks a user                              |
-| `/mute`     | Mutes a user                              |
-| `/unmute`   | Unmutes a user                            |
-| `/timeout`  | Temporarily mutes a user                  |
-| `/untimeout`| Removes timeout                           |
-| `/warn`     | Warns a user                              |
-| `/purge`    | Bulk deletes messages                     |
-| `/slowmode` | Enables channel slowmode                  |
-
+| Command      | Description              |
+| ------------ | ------------------------ |
+| `/ban`       | Bans a user              |
+| `/unban`     | Unbans a user            |
+| `/kick`      | Kicks a user             |
+| `/mute`      | Mutes a user             |
+| `/unmute`    | Unmutes a user           |
+| `/timeout`   | Temporarily mutes a user |
+| `/untimeout` | Removes timeout          |
+| `/warn`      | Warns a user             |
+| `/purge`     | Bulk deletes messages    |
+| `/slowmode`  | Enables channel slowmode |
 
 ---
 
@@ -159,6 +162,7 @@ This project is licensed under the **Apache-2.0 license**. See the [LICENSE](LIC
 ## 🎉 Acknowledgments
 
 Special thanks to:
+
 - [Discord.js](https://discord.js.org) team for the amazing library
 - [Node.js](https://nodejs.org) team
 - All open-source contributors 💖

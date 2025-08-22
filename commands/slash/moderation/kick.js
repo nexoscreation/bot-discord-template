@@ -1,31 +1,34 @@
-const { SlashCommandBuilder, PermissionFlagsBits } = require('discord.js');
-const { logError } = require('../../../utils/logger');
+const { SlashCommandBuilder, PermissionFlagsBits } = require("discord.js");
+const { logError } = require("../../../utils/logger");
 /**
  * Command: kick
  * Description: Kicks a member from the server.
  */
 module.exports = {
-  name: 'kick',
-	description: 'Kicks a member from the server.',
+  name: "kick",
+  description: "Kicks a member from the server.",
   data: new SlashCommandBuilder()
-    .setName('kick')
-    .setDescription('Kicks a member from the server')
+    .setName("kick")
+    .setDescription("Kicks a member from the server")
     .setDefaultMemberPermissions(PermissionFlagsBits.KickMembers)
-    .addUserOption(option =>
-      option.setName('target')
-        .setDescription('The member to kick')
+    .addUserOption((option) =>
+      option
+        .setName("target")
+        .setDescription("The member to kick")
         .setRequired(true)
     )
-    .addStringOption(option =>
-      option.setName('reason')
-        .setDescription('Reason for the kick')
+    .addStringOption((option) =>
+      option
+        .setName("reason")
+        .setDescription("Reason for the kick")
         .setRequired(false)
     ),
 
   async execute(interaction) {
     try {
-      const target = interaction.options.getUser('target');
-      const reason = interaction.options.getString('reason') || 'No reason provided.';
+      const target = interaction.options.getUser("target");
+      const reason =
+        interaction.options.getString("reason") || "No reason provided.";
       const member = interaction.guild.members.cache.get(target.id);
 
       if (!member) {
@@ -36,11 +39,13 @@ module.exports = {
       }
 
       await member.kick(reason);
-      await interaction.reply(`✅ Successfully kicked ${target.tag} for: ${reason}`);
+      await interaction.reply(
+        `✅ Successfully kicked ${target.tag} for: ${reason}`
+      );
     } catch (error) {
-        logError(`❌ Error executing kick command: ${error}`);
+      logError(`❌ Error executing kick command: ${error}`);
       await interaction.reply({
-        content: 'An error occurred while trying to kick the member.',
+        content: "An error occurred while trying to kick the member.",
         ephemeral: true,
       });
     }

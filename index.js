@@ -37,12 +37,14 @@ for (const file of PrefixCommandFiles) {
  * Load Context Menu Commands
  * Commands stored in the `context/` directory
  */
-const contextCommandsPath = path.join(__dirname, 'commands/context');
+const contextCommandsPath = path.join(__dirname, "commands/context");
 if (fs.existsSync(contextCommandsPath)) {
-  const contextCommandFiles = fs.readdirSync(contextCommandsPath).filter(file => file.endsWith('.js'));
+  const contextCommandFiles = fs
+    .readdirSync(contextCommandsPath)
+    .filter((file) => file.endsWith(".js"));
   for (const file of contextCommandFiles) {
     const command = require(path.join(contextCommandsPath, file));
-    if ('data' in command && 'execute' in command) {
+    if ("data" in command && "execute" in command) {
       client.commands.set(command.data.name, command);
     } else {
       logWarn(`The context command at ${file} is missing "data" or "execute".`);

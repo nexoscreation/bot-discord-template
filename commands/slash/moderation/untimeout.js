@@ -1,31 +1,34 @@
-const { SlashCommandBuilder, PermissionFlagsBits } = require('discord.js');
-const { logError } = require('../../../utils/logger');
+const { SlashCommandBuilder, PermissionFlagsBits } = require("discord.js");
+const { logError } = require("../../../utils/logger");
 /**
  * Command: untimeout
  * Description: Removes the timeout (or "silence") from a member.
  */
 module.exports = {
-  name: 'untimeout',
-	description: 'Removes the timeout (or "silence") from a member.',
+  name: "untimeout",
+  description: 'Removes the timeout (or "silence") from a member.',
   data: new SlashCommandBuilder()
-    .setName('untimeout')
-    .setDescription('Removes a timeout from a member')
+    .setName("untimeout")
+    .setDescription("Removes a timeout from a member")
     .setDefaultMemberPermissions(PermissionFlagsBits.ModerateMembers)
-    .addUserOption(option =>
-      option.setName('target')
-        .setDescription('The member to remove timeout from')
+    .addUserOption((option) =>
+      option
+        .setName("target")
+        .setDescription("The member to remove timeout from")
         .setRequired(true)
     )
-    .addStringOption(option =>
-      option.setName('reason')
-        .setDescription('Reason for the untimeout')
+    .addStringOption((option) =>
+      option
+        .setName("reason")
+        .setDescription("Reason for the untimeout")
         .setRequired(false)
     ),
 
   async execute(interaction) {
     try {
-      const target = interaction.options.getUser('target');
-      const reason = interaction.options.getString('reason') || 'No reason provided.';
+      const target = interaction.options.getUser("target");
+      const reason =
+        interaction.options.getString("reason") || "No reason provided.";
       const member = interaction.guild.members.cache.get(target.id);
 
       if (!member) {
@@ -43,11 +46,13 @@ module.exports = {
       }
 
       await member.timeout(null, reason);
-      await interaction.reply(`✅ Successfully removed the timeout from ${target.tag}. Reason: ${reason}`);
+      await interaction.reply(
+        `✅ Successfully removed the timeout from ${target.tag}. Reason: ${reason}`
+      );
     } catch (error) {
-        logError(`❌ Error executing untimeout command: ${error}`);
+      logError(`❌ Error executing untimeout command: ${error}`);
       await interaction.reply({
-        content: 'An error occurred while trying to remove the timeout.',
+        content: "An error occurred while trying to remove the timeout.",
         ephemeral: true,
       });
     }

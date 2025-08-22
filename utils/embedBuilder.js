@@ -1,4 +1,4 @@
-const { EmbedBuilder } = require('discord.js');
+const { EmbedBuilder } = require("discord.js");
 
 /**
  * Utility: Embed Builder
@@ -12,7 +12,7 @@ const { EmbedBuilder } = require('discord.js');
  * @param {string} [color] - The color of the embed (default: blue).
  * @returns {EmbedBuilder} - The constructed embed.
  */
-const createEmbed = (title, description, color = '#3498db') => {
+const createEmbed = (title, description, color = "#3498db") => {
   return new EmbedBuilder()
     .setTitle(title)
     .setDescription(description)
@@ -26,7 +26,7 @@ const createEmbed = (title, description, color = '#3498db') => {
  * @returns {EmbedBuilder} - The constructed error embed.
  */
 const createErrorEmbed = (description) => {
-  return createEmbed('❌ Error', description, '#e74c3c');
+  return createEmbed("❌ Error", description, "#e74c3c");
 };
 
 module.exports = {

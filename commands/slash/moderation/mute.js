@@ -1,37 +1,43 @@
-const { SlashCommandBuilder, PermissionFlagsBits } = require('discord.js');
-const { logError } = require('../../../utils/logger');
+const { SlashCommandBuilder, PermissionFlagsBits } = require("discord.js");
+const { logError } = require("../../../utils/logger");
 /**
  * Command: mute
  * Description: Mutes a member by assigning a "Muted" role.
  */
 module.exports = {
-  name: 'mute',
-	description: 'Mutes a member by assigning a "Muted" role.',
+  name: "mute",
+  description: 'Mutes a member by assigning a "Muted" role.',
   data: new SlashCommandBuilder()
-    .setName('mute')
+    .setName("mute")
     .setDescription('Mutes a member by assigning a "Muted" role')
     .setDefaultMemberPermissions(PermissionFlagsBits.ModerateMembers)
-    .addUserOption(option =>
-      option.setName('target')
-        .setDescription('The member to mute')
+    .addUserOption((option) =>
+      option
+        .setName("target")
+        .setDescription("The member to mute")
         .setRequired(true)
     )
-    .addStringOption(option =>
-      option.setName('reason')
-        .setDescription('Reason for the mute')
+    .addStringOption((option) =>
+      option
+        .setName("reason")
+        .setDescription("Reason for the mute")
         .setRequired(false)
     ),
 
   async execute(interaction) {
     try {
-      const target = interaction.options.getUser('target');
-      const reason = interaction.options.getString('reason') || 'No reason provided.';
+      const target = interaction.options.getUser("target");
+      const reason =
+        interaction.options.getString("reason") || "No reason provided.";
       const member = interaction.guild.members.cache.get(target.id);
-      const mutedRole = interaction.guild.roles.cache.find(role => role.name === 'Muted');
+      const mutedRole = interaction.guild.roles.cache.find(
+        (role) => role.name === "Muted"
+      );
 
       if (!mutedRole) {
         return await interaction.reply({
-          content: '❌ "Muted" role not found. Please create one before using this command.',
+          content:
+            '❌ "Muted" role not found. Please create one before using this command.',
           ephemeral: true,
         });
       }
@@ -44,11 +50,13 @@ module.exports = {
       }
 
       await member.roles.add(mutedRole, reason);
-      await interaction.reply(`✅ Successfully muted ${target.tag} for: ${reason}`);
+      await interaction.reply(
+        `✅ Successfully muted ${target.tag} for: ${reason}`
+      );
     } catch (error) {
-        logError(`❌ Error executing mute command: ${error}`);
+      logError(`❌ Error executing mute command: ${error}`);
       await interaction.reply({
-        content: 'An error occurred while trying to mute the member.',
+        content: "An error occurred while trying to mute the member.",
         ephemeral: true,
       });
     }

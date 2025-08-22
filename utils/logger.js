@@ -3,12 +3,12 @@
  * Description: Provides centralized logging functionality for the bot with different log levels.
  */
 
-const chalk = require('chalk');
+const chalk = require("chalk");
 
 const levels = {
-  info: chalk.blue('INFO'),
-  warn: chalk.yellow('WARN'),
-  error: chalk.red('ERROR'),
+  info: chalk.blue("INFO"),
+  warn: chalk.yellow("WARN"),
+  error: chalk.red("ERROR"),
 };
 
 /**
@@ -18,14 +18,16 @@ const levels = {
  */
 const log = (level, message) => {
   if (!levels[level]) {
-    console.log(`${chalk.gray('LOG')} [${new Date().toLocaleString()}] ${message}`);
+    console.log(
+      `${chalk.gray("LOG")} [${new Date().toLocaleString()}] ${message}`
+    );
     return;
   }
   console.log(`${levels[level]} [${new Date().toLocaleString()}] ${message}`);
 };
 
 module.exports = {
-  logInfo: (message) => log('info', message),
-  logWarn: (message) => log('warn', message),
-  logError: (message) => log('error', message),
+  logInfo: (message) => log("info", message),
+  logWarn: (message) => log("warn", message),
+  logError: (message) => log("error", message),
 };
